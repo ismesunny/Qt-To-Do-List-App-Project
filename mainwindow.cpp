@@ -5,7 +5,6 @@
 #include <QDir>
 #include <QFile>
 #include <QFileDialog>
-#include <QDesktopWidget>
 #include <QTextStream>
 #include <QStringList>
 #include <QListView>
