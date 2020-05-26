@@ -1,0 +1,14 @@
+<RCC>
+    <qresource prefix="/rec">
+        <file>img/icons8-add-60.png</file>
+        <file>img/icons8-remove-60.png</file>
+        <file>img/icons8-sign-out-64.png</file>
+        <file>img/icons8-task-completed-48.png</file>
+        <file>img/icons8-task-completed-100(1).png</file>
+        <file>icons8-todo-list-96.png</file>
+        <file>img/download.png</file>
+        <file>../../Pictures/Add-butt-715x715.png</file>
+        <file>../../Downloads/PicsArt_05-23-11.10.10.png</file>
+        <file>../../Downloads/PicsArt_05-23-12.07.56.png</file>
+    </qresource>
+</RCC>
