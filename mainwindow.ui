@@ -300,8 +300,8 @@ font: 75 18pt &quot;Comic Sans MS&quot;;
   </widget>
   <action name="actionRemove">
    <property name="icon">
-    <iconset resource="resource.qrc">
-     <normaloff>:/rec/Downloads/PicsArt_05-23-11.10.10.png</normaloff>:/rec/Downloads/PicsArt_05-23-11.10.10.png</iconset>
+    <iconset resource="recsource.qrc">
+     <normaloff>:/rec/img/Remove.png</normaloff>:/rec/img/Remove.png</iconset>
    </property>
    <property name="text">
     <string>Remove</string>
@@ -309,8 +309,8 @@ font: 75 18pt &quot;Comic Sans MS&quot;;
   </action>
   <action name="actionAdd">
    <property name="icon">
-    <iconset resource="resource.qrc">
-     <normaloff>:/rec/Downloads/PicsArt_05-23-12.07.56.png</normaloff>:/rec/Downloads/PicsArt_05-23-12.07.56.png</iconset>
+    <iconset resource="recsource.qrc">
+     <normaloff>:/rec/img/Add.png</normaloff>:/rec/img/Add.png</iconset>
    </property>
    <property name="text">
     <string>Add</string>
@@ -318,7 +318,7 @@ font: 75 18pt &quot;Comic Sans MS&quot;;
   </action>
  </widget>
  <resources>
-  <include location="resource.qrc"/>
+  <include location="recsource.qrc"/>
  </resources>
  <connections/>
 </ui>

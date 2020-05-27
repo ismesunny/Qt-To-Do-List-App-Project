@@ -33,7 +33,7 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-   std::cout << "Application created" <<std::endl;
+   std::cout<<"Application Created"<<std::endl;
 // QString taskItem = ui->listWidget->currentItem()->text();
      QFile filecpitem("/home/sunny/QT ALL Project/ToDoListApp-Project/CompletedData.json");
      // QString saveText = ui->plainTextEdit->toPlainText();
@@ -60,7 +60,7 @@ MainWindow::MainWindow(QWidget *parent)
 //ui->listView->setStyleSheet("background-color:pink");
 //ui->pushButton->setStyleSheet("background-color:white");
 
-    QPixmap pix(":/rec/icons8-todo-list-96.png");
+    QPixmap pix(":/rec/img/Todo-iCon.png");
  //QPixmap pix(":/rec/img/download.png");
     int h = ui->picLabel->height();
     int w = ui->picLabel->width();

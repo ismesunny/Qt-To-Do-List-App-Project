@@ -15,31 +15,35 @@
 #include <QTextStream>
 #include <QJsonObject>
 #include <QJsonDocument>
+#include <QFileDialog>
+
 secDialog::secDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::secDialog)
 {
     ui->setupUi(this); 
+    QString openFileName = ("/home/sunny/QT ALL Project/ToDoListApp-Project/taskJsData.json");
 
-    QFile filereadtask("/home/sunny/QT ALL Project/ToDoListApp-Project/taskData.json");
-    if(filereadtask.open(QIODevice::ReadOnly | QIODevice::Text)){
-       // QTextStream filetask;
-      //  QByteArray readTaskBack = filereadtask.readAll();
-    }
-    QByteArray saveData = filereadtask.readAll();
+    QFileInfo fileInfo(openFileName);
+    QDir::setCurrent(fileInfo.path());
+
+    QFile jsonFile(openFileName);
+    if (jsonFile.open(QIODevice::ReadOnly))
+    {
+    QByteArray saveData = jsonFile.readAll();
     QJsonDocument jsonDocument(QJsonDocument::fromJson(saveData));
+    m_currentJsonObject = jsonDocument.object();
+}
+    QFile filereadtask("/home/sunny/QT ALL Project/ToDoListApp-Project/taskData.json");
+    if(filereadtask.open(QIODevice::WriteOnly | QIODevice::Text)){
+     }
     QJsonArray taskJsArray = m_currentJsonObject["Todo"].toArray();
 
-
-ui->lineEdit->setText("Enter DeadLine");
-ui->lineEdit->selectAll();
-//ui->plainTextEdit->setPlainText("Please Add Your Task Here!");
 //ui->plainTextEdit->selectAll();
     setWindowTitle("Koompi Todo x List.");
     //setStyleSheet->("background-color: rgb(255, 170, 255);");
 setStyleSheet("background-color: rgb(170, 255, 255);");
 }
-
 secDialog::~secDialog()
 {
     delete ui;
@@ -47,48 +51,25 @@ secDialog::~secDialog()
 
 void secDialog::on_pushButton_clicked()
 {
-   /* QFile filereadtask("/home/sunny/QT ALL Project/ToDoListApp-Project/taskData.json");
-    if(filereadtask.open(QIODevice::ReadOnly | QIODevice::Text)){
-        QTextStream filetask;
-        QString readTaskBack = filereadtask.readAll();}
-    */
-    QFile filetask("/home/sunny/QT ALL Project/ToDoListApp-Project/taskData.json");
-    if(filetask.open(QIODevice::WriteOnly | QIODevice::Text)){
-        QJsonObject taskjsonobj;
-        taskjsonobj["DeadLine"] = ui->lineEdit->text();
-        taskjsonobj["Task"] = ui->plainTextEdit->toPlainText();
-        taskjsonobj.insert("Completed","false");
+    QString saveFileName = ("/home/sunny/QT ALL Project/ToDoListApp-Project/taskJsData.json");
+    QFileInfo fileInfo(saveFileName);
+    QDir::setCurrent(fileInfo.path());
+    QFile jsonFile(saveFileName);
+    if (!jsonFile.open(QIODevice::WriteOnly))
+    {
+        return;
+    }
+    QJsonObject textObject;
+    textObject.insert("Completed","false");
+    textObject["Deadline"] = ui->lineEdit->text();
+    textObject["Task"] = ui->plainTextEdit->toPlainText();
 
-        QFile filereadtask("/home/sunny/QT ALL Project/ToDoListApp-Project/taskData.json");
-        if(filereadtask.open(QIODevice::ReadOnly | QIODevice::Text)){
-           // QTextStream filetask;
-          //  QByteArray readTaskBack = filereadtask.readAll();
-        }
-        QByteArray saveData = filereadtask.readAll();
-        QJsonDocument jsonDocument(QJsonDocument::fromJson(saveData));
+    QJsonArray textsArray = m_currentJsonObject["Todo"].toArray();
+    textsArray.append(textObject);
+    m_currentJsonObject["Todo"] = textsArray;
+    jsonFile.write(QJsonDocument(m_currentJsonObject).toJson(QJsonDocument::Indented));
+    jsonFile.close();
 
-        QJsonArray taskJsArray = m_currentJsonObject["Todo"].toArray();
-        taskJsArray.append(taskjsonobj);
-        m_currentJsonObject["Todo"] = taskJsArray;
-  }
-
-
-    QString taskText = QJsonDocument(m_currentJsonObject).toJson(QJsonDocument::Indented);
-    //QJsonDocument(m_currentJsonObject).toJson(QJsonDocument::Indented));
-    filetask.write(QJsonDocument(m_currentJsonObject).toJson(QJsonDocument::Indented));
-    ui->lineEdit->clear();
-    filetask.close();
-    /*
-             QFile filecp("/home/sunny/QT ALL Project/ToDoListApp-Project/complettext.txt");
-               if(filecp.open(QFile::Append |  QFile::Text))
-               {
-                   QTextStream writecp(&filecp);
-                  QString textcp = ui->plainTextEdit->toPlainText();
-                  writecp<<textcp;
-                  filecp.flush();
-                  file.close();
-                  */
-//emit on_dialogTextAdded(ui->lineEdit->text());// we cant use textEdit.
    emit on_dialogTextAdded(ui->plainTextEdit->toPlainText());
   this->close();
     ui->plainTextEdit->clear();

@@ -1,2 +1,8 @@
-<!DOCTYPE RCC>
-<RCC version="1.0"/>
+<RCC>
+    <qresource prefix="/rec">
+        <file>img/Add.png</file>
+        <file>img/Koompi.png</file>
+        <file>img/Remove.png</file>
+        <file>img/Todo-iCon.png</file>
+    </qresource>
+</RCC>
