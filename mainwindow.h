@@ -46,8 +46,6 @@ private slots:
     void on_addButton_clicked();
 
 
-    void on_label_2_linkActivated(const QString &link);
-
 private:
     Ui::MainWindow *ui;
      QMenuBar *addmenubar;

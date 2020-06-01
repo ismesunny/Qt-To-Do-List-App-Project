@@ -274,7 +274,6 @@ font: 75 18pt &quot;Comic Sans MS&quot;;
     <property name="title">
      <string>Remove</string>
     </property>
-    <addaction name="actionRemove"/>
    </widget>
    <widget class="QMenu" name="menuAdd">
     <property name="title">
@@ -298,27 +297,33 @@ font: 75 18pt &quot;Comic Sans MS&quot;;
    <addaction name="actionAdd"/>
    <addaction name="actionRemove"/>
   </widget>
-  <action name="actionRemove">
-   <property name="icon">
-    <iconset resource="recsource.qrc">
-     <normaloff>:/rec/img/Remove.png</normaloff>:/rec/img/Remove.png</iconset>
-   </property>
-   <property name="text">
-    <string>Remove</string>
-   </property>
-  </action>
   <action name="actionAdd">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="icon">
-    <iconset resource="recsource.qrc">
-     <normaloff>:/rec/img/Add.png</normaloff>:/rec/img/Add.png</iconset>
+    <iconset resource="rec.qrc">
+     <normaloff>:/img/Add.png</normaloff>:/img/Add.png</iconset>
    </property>
    <property name="text">
     <string>Add</string>
    </property>
   </action>
+  <action name="actionRemove">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="rec.qrc">
+     <normaloff>:/img/Remove.png</normaloff>:/img/Remove.png</iconset>
+   </property>
+   <property name="text">
+    <string>Remove</string>
+   </property>
+  </action>
  </widget>
  <resources>
-  <include location="recsource.qrc"/>
+  <include location="rec.qrc"/>
  </resources>
  <connections/>
 </ui>

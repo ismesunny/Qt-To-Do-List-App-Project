@@ -67,7 +67,7 @@ text-decoration: line;</string>
      <item>
       <widget class="QLabel" name="label_2">
        <property name="text">
-        <string>DeadLine</string>
+        <string>deadline</string>
        </property>
       </widget>
      </item>
@@ -75,10 +75,10 @@ text-decoration: line;</string>
       <widget class="QLineEdit" name="lineEdit">
        <property name="styleSheet">
         <string notr="true">border-style: solid;
+font: 15pt &quot;Inconsolata&quot;;
 border-color: black;
 border-width: 2px;
 border-radius: 10px;
-font: 75 14pt &quot;Comic Sans MS&quot;;
 text-decoration: line;</string>
        </property>
       </widget>

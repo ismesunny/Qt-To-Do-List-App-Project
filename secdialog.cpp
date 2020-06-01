@@ -22,7 +22,6 @@ secDialog::secDialog(QWidget *parent) :
     ui(new Ui::secDialog)
 {
     ui->setupUi(this);
-    std::cout<<"dfd"<<std::endl;
    QString openData = QDir::homePath().append("/.config/todo.json");
    QFileInfo fileInfo(openData);
    QDir::setCurrent(fileInfo.path());
