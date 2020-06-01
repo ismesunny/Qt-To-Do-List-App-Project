@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "secdialog.h"
+#include "dialog.h"
 #include <QSize>
 #include <QDir>
 #include <QFile>
@@ -11,21 +12,18 @@
 #include <QAction>
 #include <QToolBar>
 #include <QApplication>
-#include <QMessageBox>
 #include <QMenuBar>
 #include <QListWidget>
-#include <QComboBox>
 #include <QList>
 #include <QDialog>
 #include <QString>
-#include <QClipboard>
 #include <QListWidgetItem>
 #include <QByteArray>
 #include <QJsonArray>
-#include <QVariantMap>
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QDebug>
+#include <QJsonValue>
 #include <iostream>
 
 MainWindow::MainWindow(QWidget *parent)
@@ -33,26 +31,39 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-   std::cout<<"Application Created"<<std::endl;
-// QString taskItem = ui->listWidget->currentItem()->text();
-     QFile filecpitem("/home/sunny/QT ALL Project/ToDoListApp-Project/CompletedData.json");
-     // QString saveText = ui->plainTextEdit->toPlainText();
-      if(filecpitem.open(QIODevice::ReadOnly | QIODevice::Text))
-      {
 
-          QTextStream text(&filecpitem);
-           QString taskItem = text.readAll();
-            QJsonDocument jsonDoc = QJsonDocument::fromJson(filecpitem.readAll());
-            QJsonObject jsonobj;
-         // jsonobj.insert("item",taskItem);
-
-          QString data = jsonDoc.object().value("item").toString();
-          ui->listWidget->addItem(data);
-//         filecpitem.write(jsondoc.toJson());
-       ui->listWidget2->addItem(data);
-
-             filecpitem.close();
-      }
+    QFile file(QDir::homePath().append("/.config/todo.json"));
+    file.open(QIODevice::ReadOnly);
+    QByteArray rawData = file.readAll();
+    file.close();
+    QJsonDocument doc(QJsonDocument::fromJson(rawData));
+    QJsonObject json = doc.object();
+     foreach(const QJsonValue &value ,json) {
+         QJsonObject obj = value.toObject();
+        // using namespace std;
+        QJsonArray todo = json["todo"].toArray();
+        for(int i = 0 ; i < todo.size() ; i++){
+            if (todo[i].toObject()["completed"].toBool() == false){
+                ui->listWidget->addItem(todo[i].toObject()["task"].toString());
+            }
+     }
+    }
+     if(!file.open(QIODevice::ReadOnly))
+     {
+             return;
+     }
+       QByteArray rawdata = file.readAll();
+       QJsonDocument Doc(QJsonDocument::fromJson(rawdata));
+       QJsonObject Json = Doc.object();
+       foreach (const QJsonValue &value ,Json) {
+           QJsonObject Obj = value.toObject();
+         QJsonArray Todo = Json["todo"].toArray();
+         for (int i = 0; i<Todo.size(); i++){
+             if(Todo[i].toObject()["completed"].toBool() == true){
+                 ui->listWidget2->addItem(Todo[i].toObject()["task"].toString());
+             }
+         }
+       }
 
     setWindowTitle("Koompi Todo x List");
 
@@ -80,7 +91,6 @@ ui->listWidget2->setDropIndicatorShown(true);
 ui->listWidget2->setAcceptDrops(true);
 
 ui->listWidget2->setDefaultDropAction(Qt::MoveAction);
-
     }
 MainWindow::~MainWindow()
 {
@@ -99,19 +109,25 @@ void MainWindow::on_actionQuit_triggered()
 void MainWindow::on_actionAdd_triggered()
 {
 addTextDialog->show();
+//Dialog dialog;
+//dialog.exec();
 
  //dlg->show();
 }
 
 void MainWindow::on_actionRemove_triggered()
 {
+   QFile del("/home/sunny/QT ALL Project/ToDoListApp-Project/taskJsData.json");
+   del.remove();
 ui->listWidget->takeItem(ui->listWidget->currentRow());
 ui->listWidget2->takeItem(ui->listWidget2->currentRow());
-//remove task
-QFile filecp("/home/sunny/QT ALL Project/ToDoListApp-Project/CompletedData.json");
-filecp.remove();
- QFile file("/home/sunny/QT ALL Project/ToDoListApp-Project/TaskData.json");
-file.remove();
+QJsonObject textObject;
+//remove Data
+QFile fileData(QDir::homePath().append("/.config/Data.json"));
+m_currentJsonObject = QJsonObject();
+if (ui->listWidget->currentItem()->isSelected()){
+
+}
 }
 
 void MainWindow::update(QString txt)
