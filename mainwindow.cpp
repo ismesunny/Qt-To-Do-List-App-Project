@@ -32,7 +32,6 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-
     QFile file(QDir::homePath().append("/.config/todo.json"));
      if(file.open(QIODevice::ReadOnly)){
      QByteArray rawData = file.readAll();
@@ -91,7 +90,6 @@ ui->listWidget2->setDropIndicatorShown(true);
 ui->listWidget2->setAcceptDrops(true);
 
 ui->listWidget2->setDefaultDropAction(Qt::MoveAction);
-
     }
 MainWindow::~MainWindow()
 {
