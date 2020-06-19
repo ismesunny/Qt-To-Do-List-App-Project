@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>800</width>
-    <height>600</height>
+    <height>632</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -88,11 +88,13 @@ text-decoration: underline;</string>
          <string/>
         </property>
         <property name="styleSheet">
-         <string notr="true">gridline-color: rgb(0, 170, 255);
-alternate-background-color: rgb(0, 255, 255);
-font: 75 20pt &quot;Comic Sans MS&quot;;
+         <string notr="true">border-style: solid;
 text-decoration: underline;
-</string>
+border-color: black;
+
+selection-background-color: rgb(170, 170, 255);
+
+font: 75 18pt &quot;Comic Sans MS&quot;;</string>
         </property>
         <property name="text">
          <string>Please Add Your Task </string>
@@ -132,8 +134,8 @@ text-decoration: underline;</string>
         <property name="styleSheet">
          <string notr="true">border-style: solid;
 border-color: black;
-border-width: 2px;
-border-radius: 10px;
+border-width: 1.3px;
+border-radius: 5px;
 selection-background-color: rgb(170, 170, 255);
 
 font: 75 18pt &quot;Comic Sans MS&quot;;</string>
@@ -190,8 +192,8 @@ text-decoration: underline;</string>
         <property name="styleSheet">
          <string notr="true">border-style: solid;
 border-color: black;
-border-width: 2px;
-border-radius: 10px;
+border-width: 1.3px;
+border-radius: 5px;
 selection-background-color: rgb(170, 170, 255);
 
 font: 75 18pt &quot;Comic Sans MS&quot;;</string>
@@ -212,11 +214,10 @@ font: 75 18pt &quot;Comic Sans MS&quot;;</string>
         </property>
         <property name="styleSheet">
          <string notr="true">border-style: solid;
+font: 57 18pt &quot;Noto Sans Display&quot;;
 border-color: black;
-border-width: 2px;
-border-radius: 10px;
-font: 75 18pt &quot;Comic Sans MS&quot;;
-text-decoration: underline;
+border-width: 1.3px;
+border-radius: 1px;
 </string>
         </property>
        </widget>
@@ -229,8 +230,8 @@ text-decoration: underline;
         <property name="styleSheet">
          <string notr="true">border-style: solid;
 border-color: black;
-border-width: 2px;
-border-radius: 10px;
+border-width: 1.3px;
+border-radius: 1px;
 font: 75 18pt &quot;Comic Sans MS&quot;;
 text-decoration: line-through;
 </string>
@@ -247,9 +248,8 @@ text-decoration: line-through;
       <property name="styleSheet">
        <string notr="true">border-style: solid;
 border-color: black;
-border-width: 2px;
-border-radius: 10px;
-selection-background-color: rgb(170, 170, 255);
+border-width: 1px;
+border-radius: 4px;
 font: 75 18pt &quot;Comic Sans MS&quot;;
 </string>
       </property>

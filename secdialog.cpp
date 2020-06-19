@@ -17,25 +17,37 @@
 #include <QJsonDocument>
 #include <QFileDialog>
 #include <iostream>
+#include <QDebug>
 secDialog::secDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::secDialog)
 {
     ui->setupUi(this);
-   QString openData = QDir::homePath().append("/.config/todo.json");
-   QFileInfo fileInfo(openData);
-   QDir::setCurrent(fileInfo.path());
-   QFile readFile(openData);
+     // setCentralWidget(ui->plainTextEdit);
+    ui->pushButton->setEnabled(false);
+    connect(ui->plainTextEdit, &QPlainTextEdit::textChanged, [&](){
+       if(ui->plainTextEdit->toPlainText().isEmpty()){
+           ui->pushButton->setEnabled(false);
+       }else{
+           ui->pushButton->setEnabled(true);
+       }
+    });
+    //qDebug()<<itemrow;
+    QString openData = QDir::homePath().append("/.config/todo.json");
+    QFileInfo fileInfo(openData);
+    QDir::setCurrent(fileInfo.path());
+    QFile readFile(openData);
     if (readFile.open(QIODevice::ReadOnly))
     {
-    QByteArray saveData = readFile.readAll();
-    QJsonDocument jsonDocument(QJsonDocument::fromJson(saveData));
-    m_currentJsonObject = jsonDocument.object();
-}
+        QByteArray saveData = readFile.readAll();
+        QJsonDocument jsonDocument(QJsonDocument::fromJson(saveData));
+        m_currentJsonObject = jsonDocument.object();
+    }
     setWindowTitle("Koompi Todo x List.");
     //setStyleSheet->("background-color: rgb(255, 170, 255);");
-setStyleSheet("background-color: rgb(170, 255, 255);");
+    setStyleSheet("background-color: rgb(170, 255, 255);");
 }
+
 secDialog::~secDialog()
 {
     delete ui;
@@ -43,17 +55,23 @@ secDialog::~secDialog()
 
 void secDialog::on_pushButton_clicked()
 {
+    if(ui->plainTextEdit->toPlainText().isEmpty()){
+        ui->pushButton->setDisabled(true);
+
+    }else{
+        ui->pushButton->setDisabled(false);
+    }
     QString fileData = QDir::homePath().append("/.config/todo.json");
     QFileInfo fileInfo(fileData);
     QDir::setCurrent(fileInfo.path());
-     QFile file(fileData);
+    QFile file(fileData);
     if (!file.open(QIODevice::WriteOnly))
     {
         return;
     }
     QJsonObject textObject;
     textObject.insert("completed",false);
-    textObject["deadline"] = ui->lineEdit->text();
+    textObject["deadline"] = ui->dateEdit->text();
     textObject["task"] = ui->plainTextEdit->toPlainText();
 
     QJsonArray textsArray = m_currentJsonObject["todo"].toArray();
@@ -61,7 +79,7 @@ void secDialog::on_pushButton_clicked()
     m_currentJsonObject["todo"] = textsArray;
     file.write(QJsonDocument(m_currentJsonObject).toJson(QJsonDocument::Indented));
     //file.close();
-   emit on_dialogTextAdded(ui->plainTextEdit->toPlainText());
-   QDialog::close();
+    emit on_dialogTextAdded(ui->plainTextEdit->toPlainText());
+    QDialog::close();
     ui->plainTextEdit->clear();
 }

@@ -3,6 +3,7 @@
 #include "secdialog.h"
 #include <secdialog.h>
 
+#include <QJsonDocument>
 #include <QMainWindow>
 #include <QMenuBar>
 #include <QMenu>
@@ -43,7 +44,8 @@ private slots:
 
     void on_finishButton_clicked();
     void on_recieveData(QString readData);
-    void on_addButton_clicked();
+    //void on_addButton_clicked();
+    void on_listwidget_clicked(QListWidgetItem * getItem);
 
 
 private:
@@ -58,5 +60,7 @@ private:
       QListWidget *listwidget;
       QListWidget *listwidget2;
       QJsonObject m_currentJsonObject;
+      int selectedRow;
+
 };
 #endif // MAINWINDOW_H

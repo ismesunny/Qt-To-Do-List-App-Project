@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>819</width>
-    <height>510</height>
+    <height>603</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -63,25 +63,93 @@ text-decoration: line;</string>
     </layout>
    </item>
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_3">
+    <layout class="QHBoxLayout" name="horizontalLayout_5">
      <item>
-      <widget class="QLabel" name="label_2">
-       <property name="text">
-        <string>deadline</string>
-       </property>
-      </widget>
+      <layout class="QHBoxLayout" name="horizontalLayout_3">
+       <item>
+        <widget class="QLabel" name="label_2">
+         <property name="styleSheet">
+          <string notr="true">border-style: solid;\nborder-color: black;\nborder-width: 1.3px;\nborder-radius: 5px;\nselection-background-color: rgb(170, 170, 255);\n\nfont: 75 18pt &quot;Comic Sans MS&quot;;</string>
+         </property>
+         <property name="text">
+          <string>deadline</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QDateEdit" name="dateEdit">
+         <property name="styleSheet">
+          <string notr="true"/>
+         </property>
+         <property name="dateTime">
+          <datetime>
+           <hour>0</hour>
+           <minute>0</minute>
+           <second>0</second>
+           <year>2020</year>
+           <month>1</month>
+           <day>1</day>
+          </datetime>
+         </property>
+         <property name="displayFormat">
+          <string>dd/MM/yyyy</string>
+         </property>
+         <property name="calendarPopup">
+          <bool>true</bool>
+         </property>
+         <property name="date">
+          <date>
+           <year>2020</year>
+           <month>1</month>
+           <day>1</day>
+          </date>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </item>
      <item>
-      <widget class="QLineEdit" name="lineEdit">
-       <property name="styleSheet">
-        <string notr="true">border-style: solid;
-font: 15pt &quot;Inconsolata&quot;;
-border-color: black;
-border-width: 2px;
-border-radius: 10px;
-text-decoration: line;</string>
+      <spacer name="horizontalSpacer_8">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
        </property>
-      </widget>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_4">
+       <item>
+        <spacer name="horizontalSpacer_6">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <spacer name="horizontalSpacer_5">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
      </item>
     </layout>
    </item>
@@ -90,10 +158,11 @@ text-decoration: line;</string>
      <property name="styleSheet">
       <string notr="true">border-style: solid;
 border-color: black;
-border-width: 2px;
-border-radius: 10px;
+border-width: 1.3px;
+border-radius: 1px;
 font: 75 18pt &quot;Comic Sans MS&quot;;
-text-decoration: line;</string>
+text-decoration: line-through;
+</string>
      </property>
     </widget>
    </item>
@@ -117,8 +186,8 @@ text-decoration: line;</string>
        <property name="styleSheet">
         <string notr="true">border-style: solid;
 border-color: black;
-border-width: 2px;
-border-radius: 10px;
+border-width: 1px;
+border-radius: 4px;
 font: 75 18pt &quot;Comic Sans MS&quot;;
 </string>
        </property>
