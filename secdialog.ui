@@ -161,7 +161,7 @@ border-color: black;
 border-width: 1.3px;
 border-radius: 1px;
 font: 75 18pt &quot;Comic Sans MS&quot;;
-text-decoration: line-through;
+
 </string>
      </property>
     </widget>
