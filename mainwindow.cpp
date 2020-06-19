@@ -166,7 +166,6 @@ void MainWindow::on_finishButton_clicked()
     JsonDocument.setObject(RootObject); // set to json document
     file.open(QFile::WriteOnly | QFile::Text | QFile::Truncate);
     file.write(JsonDocument.toJson());
-    qDebug()<<m_addvalue;
     file.close();
     //move location file
     /*QString taskItem = ui->listWidget->currentItem()->text();
