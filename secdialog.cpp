@@ -1,4 +1,4 @@
-#include "secdialog.h"
+    #include "secdialog.h"
 #include "ui_secdialog.h"
 #include <QMessageBox>
 #include <QLineEdit>
@@ -79,7 +79,10 @@ void secDialog::on_pushButton_clicked()
     m_currentJsonObject["todo"] = textsArray;
     file.write(QJsonDocument(m_currentJsonObject).toJson(QJsonDocument::Indented));
     //file.close();
-    emit on_dialogTextAdded(ui->plainTextEdit->toPlainText());
+    QListWidgetItem *item = new QListWidgetItem();
+    item->setText(ui->plainTextEdit->toPlainText());
+    item->setCheckState(Qt::Unchecked);
+    emit on_dialogTextAdded(item);
     QDialog::close();
     ui->plainTextEdit->clear();
 }

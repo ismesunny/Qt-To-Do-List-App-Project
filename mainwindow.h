@@ -43,13 +43,16 @@ private slots:
     void update(QString txt);
 
     void on_finishButton_clicked();
-    void on_recieveData(QString readData);
+    void on_recieveData(QListWidgetItem *item);
     //void on_addButton_clicked();
     void on_listwidget_clicked(QListWidgetItem * getItem);
 
 
+    void on_listWidget_itemClicked(QListWidgetItem *item);
+
 private:
     Ui::MainWindow *ui;
+    QListWidgetItem *item;
      QMenuBar *addmenubar;
      QMenuBar *removemenubar;
      QMenuBar *quitmenubar;

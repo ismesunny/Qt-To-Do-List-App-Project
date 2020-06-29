@@ -88,13 +88,7 @@ text-decoration: underline;</string>
          <string/>
         </property>
         <property name="styleSheet">
-         <string notr="true">border-style: solid;
-text-decoration: underline;
-border-color: black;
-
-selection-background-color: rgb(170, 170, 255);
-
-font: 75 18pt &quot;Comic Sans MS&quot;;</string>
+         <string notr="true">font: 18pt &quot;Noto Sans&quot;;</string>
         </property>
         <property name="text">
          <string>Please Add Your Task </string>
@@ -132,13 +126,7 @@ text-decoration: underline;</string>
          <string/>
         </property>
         <property name="styleSheet">
-         <string notr="true">border-style: solid;
-border-color: black;
-border-width: 1.3px;
-border-radius: 5px;
-selection-background-color: rgb(170, 170, 255);
-
-font: 75 18pt &quot;Comic Sans MS&quot;;</string>
+         <string notr="true">font: 16pt &quot;Noto Sans&quot;;</string>
         </property>
         <property name="text">
          <string>Task</string>
@@ -188,15 +176,9 @@ text-decoration: underline;</string>
        </spacer>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton">
+       <widget class="QLabel" name="label_3">
         <property name="styleSheet">
-         <string notr="true">border-style: solid;
-border-color: black;
-border-width: 1.3px;
-border-radius: 5px;
-selection-background-color: rgb(170, 170, 255);
-
-font: 75 18pt &quot;Comic Sans MS&quot;;</string>
+         <string notr="true">font: 16pt &quot;Noto Sans&quot;;</string>
         </property>
         <property name="text">
          <string>Completed</string>
@@ -213,12 +195,7 @@ font: 75 18pt &quot;Comic Sans MS&quot;;</string>
          <string/>
         </property>
         <property name="styleSheet">
-         <string notr="true">border-style: solid;
-font: 57 18pt &quot;Noto Sans Display&quot;;
-border-color: black;
-border-width: 1.3px;
-border-radius: 1px;
-</string>
+         <string notr="true">font: 16pt &quot;Noto Sans&quot;;</string>
         </property>
        </widget>
       </item>
@@ -228,13 +205,7 @@ border-radius: 1px;
          <string/>
         </property>
         <property name="styleSheet">
-         <string notr="true">border-style: solid;
-border-color: black;
-border-width: 1.3px;
-border-radius: 1px;
-font: 75 18pt &quot;Comic Sans MS&quot;;
-text-decoration: line-through;
-</string>
+         <string notr="true">font: 16pt &quot;Noto Sans&quot;;</string>
         </property>
        </widget>
       </item>
@@ -246,12 +217,7 @@ text-decoration: line-through;
        <string/>
       </property>
       <property name="styleSheet">
-       <string notr="true">border-style: solid;
-border-color: black;
-border-width: 1px;
-border-radius: 4px;
-font: 75 18pt &quot;Comic Sans MS&quot;;
-</string>
+       <string notr="true">font: 16pt &quot;Noto Sans&quot;;</string>
       </property>
       <property name="text">
        <string>Finish</string>

@@ -42,15 +42,20 @@ MainWindow::MainWindow(QWidget *parent)
         QByteArray rawData = file.readAll();
         QJsonDocument doc(QJsonDocument::fromJson(rawData));
         QJsonObject json = doc.object();
-         foreach(const QJsonValue &value ,json) {
+        foreach(const QJsonValue &value ,json) {
             QJsonObject obj = value.toObject();
             // using namespace std;
             QJsonArray todo = json["todo"].toArray();
-            //qDebug()<<todo;
+            //qDebug()<<todo'
+
             for(int i = 0 ; i < todo.size() ; i++){
+             item = new QListWidgetItem();
+                item->setText(todo[i].toObject()["task"].toString());
+                item->setCheckState(Qt::Unchecked);
                 if (todo[i].toObject()["completed"].toBool() == false){
-                    ui->listWidget->addItem(todo[i].toObject()["task"].toString());
-                     //qDebug()<<todo[i].toObject()["bool"].toString();
+                    //ui->listWidget->addItem(todo[i].toObject()["task"].toString());
+                    ui->listWidget->addItem(item);
+                    //qDebug()<<todo[i].toObject()["bool"].toString();
                 }
             }
         }
@@ -76,7 +81,7 @@ MainWindow::MainWindow(QWidget *parent)
     //ui->listWidget->setStyleSheet("background-color:pink");
     //ui->listView->setStyleSheet("background-color:pink");
     //ui->pushButton->setStyleSheet("background-color:white");
-    QPixmap pix(":/rec/img/icons8-todo-list-96.png");
+    QPixmap pix(":/img/Logo.png");
     //QPixmap pix(":/rec/img/download.png");
     int h = ui->picLabel->height();
     int w = ui->picLabel->width();
@@ -153,52 +158,62 @@ void MainWindow::update(QString txt)
 }
 
 void MainWindow::on_finishButton_clicked()
-{   ui->listWidget->takeItem(ui->listWidget->currentRow());
+{
+   // ui->listWidget2->addItem(widget->text());
+    //ui->listWidget->takeItem(ui->listWidget->currentRow());
+    //ui->listWidget->addItem(item);
     QString fileDel(QDir::homePath().append("/.config/todo.json"));
-        QFileInfo fileinfo(fileDel);
-        QDir::setCurrent(fileinfo.path());
-        QFile fileObjDel(fileDel);
-        if(fileObjDel.open(QIODevice::ReadWrite)){
-            QByteArray bytearray = fileObjDel.readAll();
-            QFile writejsback(fileDel);
-            if(writejsback.open(QIODevice::WriteOnly)){
-                QJsonDocument Doc(QJsonDocument::fromJson(bytearray));
-                QJsonObject obj = Doc.object();
-                QJsonArray array = obj["todo"].toArray();
-                QJsonValue valuexx = obj.value(QString("todo"));
-                QJsonDocument docc = QJsonDocument(array);
-                QJsonObject objttrue ;
-               // for(int i = 0 ; i < array.size() ; i++){
-                   // if (array[i].toObject()["completed"].toBool() == false){
-                        //qDebug()<<array[i].toObject()["completed"].toBool();
-                        //qDebug()<<array.toObject()["completed"].toBool();
+    QFileInfo fileinfo(fileDel);
+    QDir::setCurrent(fileinfo.path());
+    QFile fileObjDel(fileDel);
+    if(fileObjDel.open(QIODevice::ReadWrite | QIODevice::Text)){
+        QByteArray bytearray = fileObjDel.readAll();
+        QJsonDocument Doc(QJsonDocument::fromJson(bytearray));
+        QJsonObject obj = Doc.object();
+        QJsonArray array = obj["todo"].toArray();
+        QJsonValue valuexx = obj.value(QString("todo"));
+        QJsonDocument docc = QJsonDocument(array);
+        QJsonObject objttrue ;
+        // for(int i = 0 ; i < array.size() ; i++){
+        // if (array[i].toObject()["completed"].toBool() == false){
+        //qDebug()<<array[i].toObject()["completed"].toBool();
+        //qDebug()<<array.toObject()["completed"].toBool();
 
-               // }
-                     QJsonValue xx = array[selectedRow].toObject()["completed"].toBool();
-                       qDebug()<<array[selectedRow].toObject()["completed"].toBool();
-                       qDebug()<<array[selectedRow].toObject()["task"].toString();
-                       qDebug()<<array[selectedRow].toObject()["deadeline"].toDouble();
-                       qDebug()<<xx;
- array.removeAt(array[selectedRow].toObject()["completed"].toBool());
-                qDebug()<<array;
+        // }
+        QJsonValue xx = array[selectedRow].toObject()["completed"].toBool();
+        QJsonObject objx = xx.toObject();
+        QJsonDocument docx;
+        QJsonDocument(objx).toJson(QJsonDocument::Indented);
+        qDebug()<< QJsonDocument(objx).toJson();
+        qDebug()<<array[selectedRow].toObject()["completed"].toBool();
+        qDebug()<<array[selectedRow].toObject()["task"].toString();
+        qDebug()<<array[selectedRow].toObject()["deadeline"].toDouble();
+        qDebug()<<xx;
+        qDebug()<<"Show"<<array[selectedRow].toObject().size();
+        qDebug()<<objx;
 
-                //obj.removeAt(1);
-                /*QByteArray saveData = readFile.readAll();
+        //array.removeAt(array[selectedRow].toObject()["completed"].toBool());
+        qDebug()<<array;
+        qDebug()<<objx;
+
+        fileDel.remove(array[selectedRow].toObject()["completed"].toBool());
+        //obj.removeAt(1);
+        /*QByteArray saveData = readFile.readAll();
                 QJsonDocument jsonDocument(QJsonDocument::fromJson(saveData));
                 m_currentJsonObject = jsonDocument.object();
                 */// qDebug()<<array;
-                //qDebug()<<QJsonDocument(obj).toJson(QJsonDocument::Indented);
-               //obj.remove("completed",false);
-                // array.append(obj);
-                m_currentJsonObject["todo"]= array;
-            }
-           // fileObjDel.remove(array[selectedRow].toObject()["completed"].toBool(true));
-                //qDebug()<<QJsonDocument(m_currentJsonObject).toJson(QJsonDocument::Indented);
-                //fileObjDel.write(QJsonDocument(m_currentJsonObject).toJson(QJsonDocument::Indented));
-                //writejsback.write(array[selectedRow].toObject()["completed"].toBool(true));
-        }
-    //move location file
-    /*QString taskItem = ui->listWidget->currentItem()->text();
+        //qDebug()<<QJsonDocument(obj).toJson(QJsonDocument::Indented);
+        //obj.remove("completed",false);
+        // array.append(obj);
+        m_currentJsonObject["todo"]= array;
+    }
+    // fileObjDel.remove(array[selectedRow].toObject()["completed"].toBool(true));
+    //qDebug()<<QJsonDocument(m_currentJsonObject).toJson(QJsonDocument::Indented);
+    //fileObjDel.write(QJsonDocument(m_currentJsonObject).toJson(QJsonDocument::Indented));
+    //writejsback.write(array[selectedRow].toObject()["completed"].toBool(true));
+}
+//move location file
+/*QString taskItem = ui->listWidget->currentItem()->text();
     QFile filecpitem("/home/sunny/QT ALL Project/ToDoListApp-Project/CompletedData.json");
     // QString saveText = ui->plainTextEdit->toPlainText();
     if(filecpitem.open(QIODevice::Append | QIODevice::Text))
@@ -221,57 +236,26 @@ void MainWindow::on_finishButton_clicked()
     ui->listWidget->takeItem(ui->listWidget->currentRow());
     //move text in widget one to wideget
     // cp = complet*/
-}
-void MainWindow::on_recieveData(QString readData)
+
+void MainWindow::on_recieveData(QListWidgetItem * item)
 {
-    QListWidgetItem *item = new QListWidgetItem(readData);
     item->setFlags(item->flags() | Qt::ItemIsEditable);
     ui->listWidget->addItem(item);
 }
 
 void MainWindow::on_listwidget_clicked(QListWidgetItem *getItem)
 {
-    qDebug() << "Item clicked"<<endl;
+    qDebug() << "Item clicked"<<Qt::endl;
     selectedRow = ui->listWidget->row(getItem);
-    qDebug() << selectedRow<<endl;
+    qDebug() << selectedRow<<Qt::endl;
 
 }
 
-void MainWindow::on_pushButton_clicked()
+
+
+void MainWindow::on_listWidget_itemClicked(QListWidgetItem *item)
 {
-    ui->listWidget->setEditTriggers(QAbstractItemView::AnyKeyPressed | QAbstractItemView::DoubleClicked);
-    widget = ui->listWidget->currentItem();
-    int currentRow = ui->listWidget2->currentRow();
-    ui->listWidget2->addItem(widget->text());
-    ui->listWidget->takeItem(ui->listWidget->currentRow());
-    QFile cpFile(QDir::homePath().append("/.config/todo.json"));
-   // QFile cpFile("/home/sunny/Downloads/NEW.json");
-    if(cpFile.open(QIODevice::ReadWrite | QIODevice::Text))
-    {
-        /*
-        QString inputData = cpFile.readAll();
-        QJsonDocument jsonDoc = QJsonDocument::fromJson(inputData.toUtf8());  // This gets the document
-        QJsonObject obj = jsonDoc.object(); // This converts the document into an object
-        QJsonValue value = obj.value(QString("completed")); // Contains the value I want to update before writing
-
-      value = true;
-      qDebug()<<value;
+    if (item->checkState() == Qt::Checked){
+        qDebug()<<"Row " << selectedRow;
     }
-*/
-    // read data
-      QString ReplyText = cpFile.readAll();
-      // qDebug() << ReplyText;
-      // ask doc to parse it
-      QJsonDocument doc = QJsonDocument::fromJson(ReplyText.toUtf8());
-      // we know first element in file is object, to try to ask for such
-      QJsonObject obj = doc.object();
-      // ask object for value
-      QJsonValue value = obj.value(QString("task"));
-      QJsonArray array = obj["todo"].toArray();
-      QJsonValue valuexx = obj.value(QString("todo"));
-      QJsonDocument docc = QJsonDocument(array);
-      QJsonObject objttrue ;
-      qDebug()<< obj;
-      qDebug() << "Bid value is" << value.toString();;
-}
 }

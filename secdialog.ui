@@ -35,12 +35,8 @@
      <item>
       <widget class="QLabel" name="label">
        <property name="styleSheet">
-        <string notr="true">border-style: solid;
-border-color: black;
-border-width: 2px;
-border-radius: 10px;
-font: 75 18pt &quot;Comic Sans MS&quot;;
-text-decoration: line;</string>
+        <string notr="true">font: 18pt &quot;Noto Sans&quot;;
+</string>
        </property>
        <property name="text">
         <string>Please Add Your Task Bellow</string>
@@ -69,7 +65,7 @@ text-decoration: line;</string>
        <item>
         <widget class="QLabel" name="label_2">
          <property name="styleSheet">
-          <string notr="true">border-style: solid;\nborder-color: black;\nborder-width: 1.3px;\nborder-radius: 5px;\nselection-background-color: rgb(170, 170, 255);\n\nfont: 75 18pt &quot;Comic Sans MS&quot;;</string>
+          <string notr="true">font: 16pt &quot;Noto Sans&quot;;</string>
          </property>
          <property name="text">
           <string>deadline</string>
@@ -79,7 +75,7 @@ text-decoration: line;</string>
        <item>
         <widget class="QDateEdit" name="dateEdit">
          <property name="styleSheet">
-          <string notr="true"/>
+          <string notr="true">font: 16pt &quot;Noto Sans&quot;;</string>
          </property>
          <property name="dateTime">
           <datetime>
@@ -156,11 +152,7 @@ text-decoration: line;</string>
    <item>
     <widget class="QPlainTextEdit" name="plainTextEdit">
      <property name="styleSheet">
-      <string notr="true">border-style: solid;
-border-color: black;
-border-width: 1.3px;
-border-radius: 1px;
-font: 75 18pt &quot;Comic Sans MS&quot;;
+      <string notr="true">
 
 </string>
      </property>
@@ -184,11 +176,7 @@ font: 75 18pt &quot;Comic Sans MS&quot;;
      <item>
       <widget class="QPushButton" name="pushButton">
        <property name="styleSheet">
-        <string notr="true">border-style: solid;
-border-color: black;
-border-width: 1px;
-border-radius: 4px;
-font: 75 18pt &quot;Comic Sans MS&quot;;
+        <string notr="true">font: 16pt &quot;Noto Sans&quot;;
 </string>
        </property>
        <property name="text">

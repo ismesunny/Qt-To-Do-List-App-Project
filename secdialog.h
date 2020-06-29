@@ -3,7 +3,7 @@
 
 #include <QDialog>
 #include <QJsonObject>
-
+#include <QListWidgetItem>
 namespace Ui {
 class secDialog;
 }
@@ -16,7 +16,7 @@ public:
     explicit secDialog(QWidget *parent = nullptr);
     ~secDialog();
 signals:
-    void on_dialogTextAdded(QString data);
+    void on_dialogTextAdded(QListWidgetItem *);
 private slots:
     void on_pushButton_clicked();
 private:
