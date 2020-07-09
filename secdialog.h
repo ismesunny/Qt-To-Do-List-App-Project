@@ -4,6 +4,7 @@
 #include <QDialog>
 #include <QJsonObject>
 #include <QListWidgetItem>
+
 namespace Ui {
 class secDialog;
 }
@@ -15,6 +16,7 @@ class secDialog : public QDialog
 public:
     explicit secDialog(QWidget *parent = nullptr);
     ~secDialog();
+
 signals:
     void on_dialogTextAdded(QListWidgetItem *);
 private slots:
@@ -22,9 +24,6 @@ private slots:
 private:
     Ui::secDialog *ui;
       QJsonObject m_currentJsonObject;
-
 };
 
 #endif // SECDIALOG_H
-
-

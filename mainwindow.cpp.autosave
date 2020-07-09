@@ -21,7 +21,7 @@ MainWindow::MainWindow(QWidget *parent)
                 item = new QListWidgetItem;
                 item->setText(todo[i].toObject()["task"].toString());
                 item->setCheckState(Qt::Unchecked);
-                item->setFlags(item->flags() &~Qt::ItemIsSelectable);
+               // item->setFlags(item->flags() &~Qt::ItemIsSelectable);
                 ui->listWidget->addItem(item);
                 //qDebug()<<todo[i].toObject()["task"].toString();
             }

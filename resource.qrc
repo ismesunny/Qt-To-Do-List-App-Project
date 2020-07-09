@@ -1,8 +1,0 @@
-<RCC>
-    <qresource prefix="/rec">
-        <file>img/Remove.png</file>
-        <file>img/Add.png</file>
-        <file>img/Koompi.png</file>
-        <file>img/Logo.png</file>
-    </qresource>
-</RCC>

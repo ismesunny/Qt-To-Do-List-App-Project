@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>632</height>
+    <width>812</width>
+    <height>661</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,240 +16,63 @@
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
-     <layout class="QHBoxLayout" name="horizontalLayout_5">
-      <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_3">
-        <item>
-         <layout class="QHBoxLayout" name="horizontalLayout_2">
-          <item>
-           <widget class="QLabel" name="picLabel">
-            <property name="whatsThis">
-             <string/>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">
-font: 75 18pt &quot;Comic Sans MS&quot;;
-text-decoration: underline;</string>
-            </property>
-            <property name="text">
-             <string>Pic</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <spacer name="horizontalSpacer">
-            <property name="whatsThis">
-             <string/>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">
-font: 75 18pt &quot;Comic Sans MS&quot;;
-text-decoration: underline;</string>
-            </property>
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>28</width>
-              <height>20</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-         </layout>
-        </item>
-        <item>
-         <spacer name="horizontalSpacer_5">
-          <property name="whatsThis">
-           <string/>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">
-font: 75 18pt &quot;Comic Sans MS&quot;;
-text-decoration: underline;</string>
-          </property>
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>40</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-       </layout>
-      </item>
-      <item>
-       <widget class="QLabel" name="label">
-        <property name="whatsThis">
-         <string/>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">font: 18pt &quot;Noto Sans&quot;;</string>
-        </property>
-        <property name="text">
-         <string>Please Add Your Task </string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <spacer name="horizontalSpacer_2">
-        <property name="whatsThis">
-         <string/>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">
-font: 75 18pt &quot;Comic Sans MS&quot;;
-text-decoration: underline;</string>
-        </property>
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-     </layout>
-    </item>
-    <item>
-     <layout class="QHBoxLayout" name="horizontalLayout_4">
-      <item>
-       <widget class="QLabel" name="label_2">
-        <property name="whatsThis">
-         <string/>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">font: 16pt &quot;Noto Sans&quot;;</string>
-        </property>
-        <property name="text">
-         <string>Task</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <spacer name="horizontalSpacer_3">
-        <property name="whatsThis">
-         <string/>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">
-font: 75 18pt &quot;Comic Sans MS&quot;;
-text-decoration: underline;</string>
-        </property>
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item>
-       <spacer name="horizontalSpacer_4">
-        <property name="whatsThis">
-         <string/>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">
-font: 75 18pt &quot;Comic Sans MS&quot;;
-text-decoration: underline;</string>
-        </property>
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item>
-       <widget class="QLabel" name="label_3">
-        <property name="styleSheet">
-         <string notr="true">font: 16pt &quot;Noto Sans&quot;;</string>
-        </property>
-        <property name="text">
-         <string>Completed</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </item>
-    <item>
-     <layout class="QHBoxLayout" name="horizontalLayout">
-      <item>
-       <widget class="QListWidget" name="listWidget">
-        <property name="whatsThis">
-         <string/>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">font: 16pt &quot;Noto Sans&quot;;</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QListWidget" name="listWidget2">
-        <property name="whatsThis">
-         <string/>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">font: 16pt &quot;Noto Sans&quot;;</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </item>
-    <item>
-     <widget class="QPushButton" name="finishButton">
-      <property name="whatsThis">
-       <string/>
-      </property>
+     <widget class="QTabWidget" name="tabWidget">
       <property name="styleSheet">
        <string notr="true">font: 16pt &quot;Noto Sans&quot;;</string>
       </property>
-      <property name="text">
-       <string>Finish</string>
+      <property name="currentIndex">
+       <number>0</number>
       </property>
+      <widget class="QWidget" name="task">
+       <attribute name="title">
+        <string>Task</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_2">
+        <item>
+         <widget class="QListWidget" name="listWidget"/>
+        </item>
+        <item>
+         <widget class="QPushButton" name="finishButton">
+          <property name="styleSheet">
+           <string notr="true">font: 14pt &quot;Noto Sans&quot;;</string>
+          </property>
+          <property name="text">
+           <string>Finish</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="completed">
+       <attribute name="title">
+        <string>Completed</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_3">
+        <item>
+         <widget class="QListWidget" name="listWidget2"/>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="deadline">
+       <attribute name="title">
+        <string>Deadline</string>
+       </attribute>
+      </widget>
      </widget>
     </item>
    </layout>
   </widget>
-  <widget class="QStatusBar" name="statusbar"/>
-  <widget class="QMenuBar" name="menuBar">
+  <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
+     <width>812</width>
      <height>30</height>
     </rect>
    </property>
-   <widget class="QMenu" name="menuRemove">
-    <property name="title">
-     <string>Remove</string>
-    </property>
-   </widget>
-   <widget class="QMenu" name="menuAdd">
-    <property name="title">
-     <string>Add</string>
-    </property>
-    <addaction name="actionAdd"/>
-   </widget>
-   <addaction name="menuAdd"/>
-   <addaction name="menuRemove"/>
   </widget>
+  <widget class="QStatusBar" name="statusbar"/>
   <widget class="QToolBar" name="toolBar">
    <property name="windowTitle">
     <string>toolBar</string>
@@ -264,24 +87,18 @@ text-decoration: underline;</string>
    <addaction name="actionRemove"/>
   </widget>
   <action name="actionAdd">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
    <property name="icon">
-    <iconset resource="rec.qrc">
-     <normaloff>:/img/Add.png</normaloff>:/img/Add.png</iconset>
+    <iconset resource="recsource.qrc">
+     <normaloff>:/rec/img/Add.png</normaloff>:/rec/img/Add.png</iconset>
    </property>
    <property name="text">
     <string>Add</string>
    </property>
   </action>
   <action name="actionRemove">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
    <property name="icon">
-    <iconset resource="rec.qrc">
-     <normaloff>:/img/Remove.png</normaloff>:/img/Remove.png</iconset>
+    <iconset resource="recsource.qrc">
+     <normaloff>:/rec/img/Remove.png</normaloff>:/rec/img/Remove.png</iconset>
    </property>
    <property name="text">
     <string>Remove</string>
@@ -289,7 +106,7 @@ text-decoration: underline;</string>
   </action>
  </widget>
  <resources>
-  <include location="rec.qrc"/>
+  <include location="recsource.qrc"/>
  </resources>
  <connections/>
 </ui>
