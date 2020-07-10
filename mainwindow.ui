@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>812</width>
-    <height>661</height>
+    <width>839</width>
+    <height>654</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,10 +18,11 @@
     <item>
      <widget class="QTabWidget" name="tabWidget">
       <property name="styleSheet">
-       <string notr="true">font: 16pt &quot;Noto Sans&quot;;</string>
+       <string notr="true">font: 16pt &quot;Noto Sans&quot;;
+</string>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="task">
        <attribute name="title">
@@ -29,15 +30,9 @@
        </attribute>
        <layout class="QVBoxLayout" name="verticalLayout_2">
         <item>
-         <widget class="QListWidget" name="listWidget"/>
-        </item>
-        <item>
-         <widget class="QPushButton" name="finishButton">
+         <widget class="QListWidget" name="listWidget">
           <property name="styleSheet">
            <string notr="true">font: 14pt &quot;Noto Sans&quot;;</string>
-          </property>
-          <property name="text">
-           <string>Finish</string>
           </property>
          </widget>
         </item>
@@ -49,14 +44,14 @@
        </attribute>
        <layout class="QVBoxLayout" name="verticalLayout_3">
         <item>
-         <widget class="QListWidget" name="listWidget2"/>
+         <widget class="QListWidget" name="listWidget2">
+          <property name="styleSheet">
+           <string notr="true">font: 14pt &quot;Noto Sans&quot;;
+</string>
+          </property>
+         </widget>
         </item>
        </layout>
-      </widget>
-      <widget class="QWidget" name="deadline">
-       <attribute name="title">
-        <string>Deadline</string>
-       </attribute>
       </widget>
      </widget>
     </item>
@@ -67,7 +62,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>812</width>
+     <width>839</width>
      <height>30</height>
     </rect>
    </property>

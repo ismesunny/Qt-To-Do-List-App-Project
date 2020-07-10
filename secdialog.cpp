@@ -7,7 +7,8 @@ secDialog::secDialog(QWidget *parent) :
     ui(new Ui::secDialog)
 {
     ui->setupUi(this);
-
+    //ui->plainTextEdit->setFocusPolicy(Qt::NoFocus);
+   //ui->dateEdit->setFocusPolicy(Qt::NoFocus);
     //Set Disable Button When Text is Empty
     ui->pushButton->setEnabled(false);
     connect(ui->plainTextEdit, &QPlainTextEdit::textChanged, [&](){
@@ -38,6 +39,10 @@ secDialog::~secDialog()
 
 void secDialog::on_pushButton_clicked()
 {
+    //ui->plainTextEdit->setFocusPolicy(Qt::NoFocus);
+   // ui->dateEdit->setFocusPolicy(Qt::NoFocus);
+    QColor coloritem( 213, 216, 220 );
+        QBrush brushitem(coloritem);
     QString fileData = QDir::homePath().append("/.config/todo.json");
     //Read Size Array
     QFile filesize(fileData);
@@ -69,8 +74,12 @@ void secDialog::on_pushButton_clicked()
     file.write(QJsonDocument(m_currentJsonObject).toJson(QJsonDocument::Indented));
     //Commit Task As Item
     QListWidgetItem *item = new QListWidgetItem();
-    item->setText(ui->plainTextEdit->toPlainText());
+    item->setText("\n " + ui->plainTextEdit->toPlainText() + "\n\t\t\t\t\t\t\t\t" + ui->dateEdit->text());
     item->setCheckState(Qt::Unchecked);
+    item->setSelected(false);
+    item->setBackground(brushitem);
+    item->setFlags(item->flags() &~Qt::ItemIsSelectable);
+
     emit on_dialogTextAdded(item);
     ui->plainTextEdit->clear();
     QDialog::close();

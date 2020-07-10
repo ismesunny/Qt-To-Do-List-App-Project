@@ -4,11 +4,21 @@
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
+
 {
     ui->setupUi(this);
+    QColor coloritem( 213, 216, 220 );
+    QBrush brushitem(coloritem);
+    ui->listWidget->setSpacing(1);
+    ui->listWidget2->setSpacing(1);
+    ui->tabWidget->setFocusPolicy(Qt::NoFocus);
+    ui->listWidget->setFocusPolicy(Qt::NoFocus);
+    ui->listWidget2->setFocusPolicy(Qt::NoFocus);
     setCentralWidget(ui->tabWidget);
     connect(ui->listWidget, &QListWidget::itemClicked, this, &MainWindow::on_listwidget_clicked);
     connect(ui->listWidget2, &QListWidget::itemClicked,this,&MainWindow::on_listWidget2_itemClicked);
+    connect(ui->listWidget, &QListWidget::itemClicked, this, &MainWindow::on_checkboxpush_clicked);
+    connect(ui->listWidget2, &QListWidget::itemClicked, this, &MainWindow::on_checkboxback_clicked);
     QFile file(QDir::homePath().append("/.config/todo.json"));
     if(file.open(QIODevice::ReadOnly)){
         QByteArray rawData = file.readAll();
@@ -19,16 +29,20 @@ MainWindow::MainWindow(QWidget *parent)
         for(int i = 0 ; i < todo.size() ; i++){
             if (todo[i].toObject()["completed"].toBool() == false && todo[i].toObject()["task"].toString().isEmpty() == false){
                 item = new QListWidgetItem;
-                item->setText(todo[i].toObject()["task"].toString());
+                item->setText("\n " + todo[i].toObject()["task"].toString() + "\n\t\t\t\t\t\t\t\t" + todo[i].toObject()["deadline"].toString());
                 item->setCheckState(Qt::Unchecked);
+                item->setBackground(brushitem);
+                //ui->listWidget->setFocusPolicy(Qt::NoFocus);
                 item->setFlags(item->flags() &~Qt::ItemIsSelectable);
                 ui->listWidget->addItem(item);
                 //qDebug()<<todo[i].toObject()["task"].toString();
             }
             if (todo[i].toObject()["completed"].toBool() == true){
                 itemcp = new QListWidgetItem();
-                itemcp->setText(todo[i].toObject()["task"].toString());
+                itemcp->setText("\n " + todo[i].toObject()["task"].toString() + "\n\t\t\t\t\t\t\t\t" + todo[i].toObject()["deadline"].toString());
                 itemcp->setCheckState(Qt::Checked);
+                itemcp->setBackground(brushitem);
+                itemcp->setFlags(itemcp->flags());
                 ui->listWidget2->addItem(itemcp);
             }
         }
@@ -45,10 +59,6 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::on_actionQuit_triggered()
-{
-    QApplication::quit();
-}
 
 void MainWindow::on_actionAdd_triggered()
 {
@@ -71,6 +81,7 @@ void MainWindow::on_actionRemove_triggered()
         // + Remove Task
         //New Object
         QJsonObject newobj;
+        /*
         newobj.insert("id",arraysize[id].toObject()["id"].toInt());
         newobj.insert("completed","delected");
         newobj.insert("deadline",arraysize[id].toObject()["deadline"].toString());
@@ -78,9 +89,9 @@ void MainWindow::on_actionRemove_triggered()
         //Remove And Replace
         arraysize.removeAt(id);
         arraysize.insert(id,newobj);
-
+*/
         // + Remove CP
-        /*
+
         newobj.insert("id",arraysize[idcpdel].toObject()["id"].toInt());
         newobj.insert("completed","delected");
         newobj.insert("deadline",arraysize[idcpdel].toObject()["deadline"].toString());
@@ -89,7 +100,6 @@ void MainWindow::on_actionRemove_triggered()
         arraysize.removeAt(idcpdel);
         arraysize.insert(idcpdel,newobj);
 
-        /*/
         //Rewrite All Data
         doc.setObject(newobj);
         QJsonDocument Doc(newobj);
@@ -102,14 +112,75 @@ void MainWindow::on_actionRemove_triggered()
             newfilesize.write(QJsonDocument(m_delecttask).toJson(QJsonDocument::Indented));
             newfilesize.close();
         }
-        ui->listWidget->takeItem(ui->listWidget->currentRow());
-        // ui->listWidget2->takeItem(ui->listWidget2->currentRow());
+        ui->listWidget2->takeItem(ui->listWidget2->currentRow());
+        // ui->listWidget->takeItem(ui->listWidget->currentRow());
     }
 }
 
-void MainWindow::on_finishButton_clicked()
+void MainWindow::on_recieveData(QListWidgetItem * item)
 {
+    //item->setFlags(item->flags() | Qt::ItemIsEditable);
+    item->setFlags(item->flags());
+    ui->listWidget->addItem(item);
+}
 
+void MainWindow::on_checkboxpush_clicked(QListWidgetItem *itemcb)
+{
+    QColor coloritem( 213, 216, 220 );
+    QBrush brushitem(coloritem);
+    if(itemcb->checkState() == Qt::Checked){
+        // ui->listWidget->takeItem(selectedRow);
+        qDebug() << "Item checked";
+
+        QString fileDatanew = QDir::homePath().append("/.config/todo.json");
+        QFileInfo fileInfonew(fileDatanew);
+        QDir::setCurrent(fileInfonew.path());
+        QFile filesizenew(fileDatanew);
+        if(filesizenew.open(QIODevice::ReadWrite | QIODevice::Text))
+        {
+            QByteArray arraynew = filesizenew.readAll();
+            QJsonDocument docnew(QJsonDocument::fromJson(arraynew));
+            QJsonObject objnew = docnew.object();
+            QJsonArray arraysizenew = objnew["todo"].toArray();
+            //New Object
+            QJsonObject newobjnew;
+            newobjnew.insert("id",arraysizenew[id].toObject()["id"].toInt());
+            newobjnew.insert("completed",true);
+            newobjnew.insert("deadline",arraysizenew[id].toObject()["deadline"].toString());
+            newobjnew.insert("task",arraysizenew[id].toObject()["task"].toString());
+            //Remove And Replace
+            arraysizenew.removeAt(id);
+            arraysizenew.insert(id,newobjnew);
+
+            docnew.setObject(newobjnew);
+            QJsonDocument Doc(newobjnew);;
+            QJsonDocument docsize(arraysizenew);
+            m_objtodonew["todo"] = arraysizenew;
+            //Write New Array To Replace File
+            QFile newfilesize(fileDatanew);
+            if(newfilesize.open(QIODevice::WriteOnly))
+            {
+                newfilesize.write(QJsonDocument(m_objtodonew).toJson(QJsonDocument::Indented));
+                newfilesize.close();
+            }
+
+            ui->listWidget->takeItem(selectedRow);
+            // ui->listWidget->takeItem(ui->listWidget->currentRow());
+            //ui->listWidget->takeItem(check)
+
+            QListWidgetItem *itemCP = new QListWidgetItem();
+            itemCP->setText("\n " + arraysizenew[id].toObject()["task"].toString() + "\n\t\t\t\t\t\t\t\t" + arraysizenew[id].toObject()["deadline"].toString());
+            itemCP->setCheckState(Qt::Checked);
+            itemCP->setFlags(itemCP->flags());
+            itemCP->setBackground(brushitem);
+            //emit on_dialogTextAdded(item);
+            ui->listWidget2->addItem(itemCP);
+        }
+    }
+    /*
+if (itemcb->checkState() == Qt::Checked){
+    qDebug()<<"Row";
+    qDebug()<<"Item Click";
     QString fileDatanew = QDir::homePath().append("/.config/todo.json");
     QFileInfo fileInfonew(fileDatanew);
     QDir::setCurrent(fileInfonew.path());
@@ -141,8 +212,8 @@ void MainWindow::on_finishButton_clicked()
             newfilesize.write(QJsonDocument(m_objtodonew).toJson(QJsonDocument::Indented));
             newfilesize.close();
         }
-
         ui->listWidget->takeItem(ui->listWidget->currentRow());
+        //ui->listWidget->takeItem(ui->listWidget->currentRow());
         //ui->listWidget->takeItem(check)
 
         QListWidgetItem *itemCP = new QListWidgetItem();
@@ -151,19 +222,67 @@ void MainWindow::on_finishButton_clicked()
         //emit on_dialogTextAdded(item);
         ui->listWidget2->addItem(itemCP);
     }
-    // ui->listWidget->takeItem(ui->listWidget->currentRow());
-    // ui->listWidget2->addItem(itemCP);
+}*/
 }
 
-void MainWindow::on_recieveData(QListWidgetItem * item)
+void MainWindow::on_checkboxback_clicked(QListWidgetItem *itemcbback)
 {
-    //item->setFlags(item->flags() | Qt::ItemIsEditable);
-    item->setFlags(item->flags());
-    ui->listWidget->addItem(item);
+    QColor coloritem( 213, 216, 220 );
+    QBrush brushitem(coloritem);
+    if(itemcbback->checkState() == Qt::Unchecked){
+        // ui->listWidget->takeItem(selectedRow);
+        qDebug() << "Item checked";
+
+        QString fileDatanew = QDir::homePath().append("/.config/todo.json");
+        QFileInfo fileInfonew(fileDatanew);
+        QDir::setCurrent(fileInfonew.path());
+        QFile filesizenew(fileDatanew);
+        if(filesizenew.open(QIODevice::ReadWrite | QIODevice::Text))
+        {
+            QByteArray arraynew = filesizenew.readAll();
+            QJsonDocument docnew(QJsonDocument::fromJson(arraynew));
+            QJsonObject objnew = docnew.object();
+            QJsonArray arraysizenew = objnew["todo"].toArray();
+            //New Object
+            QJsonObject newobjnew;
+            newobjnew.insert("id",arraysizenew[idcpdel].toObject()["id"].toInt());
+            newobjnew.insert("completed",false);
+            newobjnew.insert("deadline",arraysizenew[idcpdel].toObject()["deadline"].toString());
+            newobjnew.insert("task",arraysizenew[idcpdel].toObject()["task"].toString());
+            //Remove And Replace
+            arraysizenew.removeAt(idcpdel);
+            arraysizenew.insert(idcpdel,newobjnew);
+
+            docnew.setObject(newobjnew);
+            QJsonDocument Doc(newobjnew);;
+            QJsonDocument docsize(arraysizenew);
+            m_objtodonew["todo"] = arraysizenew;
+            //Write New Array To Replace File
+            QFile newfilesize(fileDatanew);
+            if(newfilesize.open(QIODevice::WriteOnly))
+            {
+                newfilesize.write(QJsonDocument(m_objtodonew).toJson(QJsonDocument::Indented));
+                newfilesize.close();
+            }
+
+            ui->listWidget2->takeItem(selectedRowCPDel);
+            // ui->listWidget->takeItem(ui->listWidget->currentRow());
+            //ui->listWidget->takeItem(check)
+
+            QListWidgetItem *itemcpcbback = new QListWidgetItem();
+            itemcpcbback->setText("\n " + arraysizenew[idcpdel].toObject()["task"].toString() + "\n\t\t\t\t\t\t\t\t" + arraysizenew[idcpdel].toObject()["deadline"].toString());
+            itemcpcbback->setCheckState(Qt::Unchecked);
+            itemcpcbback->setFlags(itemcpcbback->flags());
+            itemcpcbback->setBackground(brushitem);
+            //emit on_dialogTextAdded(item);
+            ui->listWidget->addItem(itemcpcbback);
+        }
+    }
 }
 
 void MainWindow::on_listwidget_clicked(QListWidgetItem *getItem)
 {
+
     QString fileData = QDir::homePath().append("/.config/todo.json");
     QFile filesize(fileData);
     if(!filesize.open(QIODevice::ReadOnly))
@@ -176,12 +295,13 @@ void MainWindow::on_listwidget_clicked(QListWidgetItem *getItem)
     QJsonArray arraysize = obj["todo"].toArray();
     for(int i =0;i<arraysize.count();i++){
         //        array[selectedRow].toObject()["task"].toString()
-        if (arraysize[i].toObject()["task"].toString() == getItem->text()){
+        if ("\n " + arraysize[i].toObject()["task"].toString() + "\n\t\t\t\t\t\t\t\t" + arraysize[i].toObject()["deadline"].toString() == getItem->text()){
             id = arraysize[i].toObject()["id"].toInt();
             qDebug() <<"ID IN JSON FILE"<< arraysize[i].toObject()["id"].toInt();
         }
     }
-    //  selectedRow = ui->listWidget->row(getItem);
+    selectedRow = ui->listWidget->row(getItem);
+    qDebug()<<"Select Row"<<selectedRow;
     emit emitItemToList(getItem);
 
 }
@@ -335,12 +455,14 @@ void MainWindow::on_listWidget2_itemClicked(QListWidgetItem *itemCPDel)
 
     for(int i =0;i<arraysize.count();i++){
         //        array[selectedRow].toObject()["task"].toString()
-        if (arraysize[i].toObject()["task"].toString() == itemCPDel->text()){
+       // if (arraysize[i].toObject()["task"].toString() == itemCPDel->text()){
+        if("\n " + arraysize[i].toObject()["task"].toString() + "\n\t\t\t\t\t\t\t\t" + arraysize[i].toObject()["deadline"].toString() == itemCPDel->text()){
             idcpdel = arraysize[i].toObject()["id"].toInt();
             qDebug() <<"IDCPDEL IN JSON FILE"<< arraysize[i].toObject()["id"].toInt();
         }
     }
-    //selectedRowCPDel = ui->listWidget2->row(itemCPDel);
+    selectedRowCPDel = ui->listWidget2->row(itemCPDel);
+    qDebug()<<"selectedCPDel"<<selectedRowCPDel;
     emit emitcpItemDel(itemCPDel);
 }
 

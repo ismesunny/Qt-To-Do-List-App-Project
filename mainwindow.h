@@ -53,28 +53,23 @@ public:
        void emitItemToList(QListWidgetItem *item);
        void emitcpItemDel(QListWidgetItem *itemcp);
 
-   private slots:
+   public slots:
 
-
-       void on_actionQuit_triggered();
 
        void on_actionAdd_triggered();
 
        void on_actionRemove_triggered();
-
-       void on_pushButton_clicked();
-       void update(QString txt);
-
-       void on_finishButton_clicked();
        void on_recieveData(QListWidgetItem *item);
-       //void on_addButton_clicked();
+       void on_checkboxpush_clicked(QListWidgetItem *itemcb);
+       void on_checkboxback_clicked(QListWidgetItem *itemcbback);
        void on_listwidget_clicked(QListWidgetItem * getItem);
-
-
        void on_listWidget2_itemClicked(QListWidgetItem *itemCPDel);
 
    private:
+
        Ui::MainWindow *ui;
+       QListWidgetItem *itemcb;
+       QListWidgetItem *itemcbback;
        QListWidgetItem *item;
        QListWidgetItem *itemcp;
         QMenuBar *addmenubar;
