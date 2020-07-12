@@ -7,8 +7,13 @@ MainWindow::MainWindow(QWidget *parent)
 
 {
     ui->setupUi(this);
+
     QColor coloritem( 213, 216, 220 );
+    QColor blackcolor(0,0,0);
     QBrush brushitem(coloritem);
+   // setStyleSheet("background-color:white;");
+    ui->listWidget->setBackgroundRole(QPalette::ColorRole(Qt::white));
+    //ui->listWidget2->setBackgroundRole(QPalette::ColorRole(Qt::white));
     ui->listWidget->setSpacing(1);
     ui->listWidget2->setSpacing(1);
     ui->tabWidget->setFocusPolicy(Qt::NoFocus);
@@ -32,6 +37,7 @@ MainWindow::MainWindow(QWidget *parent)
                 item->setText("\n " + todo[i].toObject()["task"].toString() + "\n\t\t\t\t\t\t\t\t" + todo[i].toObject()["deadline"].toString());
                 item->setCheckState(Qt::Unchecked);
                 item->setBackground(brushitem);
+                item->setForeground(blackcolor);
                 //ui->listWidget->setFocusPolicy(Qt::NoFocus);
                 item->setFlags(item->flags() &~Qt::ItemIsSelectable);
                 ui->listWidget->addItem(item);
@@ -42,6 +48,7 @@ MainWindow::MainWindow(QWidget *parent)
                 itemcp->setText("\n " + todo[i].toObject()["task"].toString() + "\n\t\t\t\t\t\t\t\t" + todo[i].toObject()["deadline"].toString());
                 itemcp->setCheckState(Qt::Checked);
                 itemcp->setBackground(brushitem);
+                itemcp->setForeground(blackcolor);
                 itemcp->setFlags(itemcp->flags());
                 ui->listWidget2->addItem(itemcp);
             }
@@ -127,7 +134,9 @@ void MainWindow::on_recieveData(QListWidgetItem * item)
 void MainWindow::on_checkboxpush_clicked(QListWidgetItem *itemcb)
 {
     QColor coloritem( 213, 216, 220 );
+    QColor blackcolor(0, 0, 0);
     QBrush brushitem(coloritem);
+
     if(itemcb->checkState() == Qt::Checked){
         // ui->listWidget->takeItem(selectedRow);
         qDebug() << "Item checked";
@@ -171,6 +180,7 @@ void MainWindow::on_checkboxpush_clicked(QListWidgetItem *itemcb)
             QListWidgetItem *itemCP = new QListWidgetItem();
             itemCP->setText("\n " + arraysizenew[id].toObject()["task"].toString() + "\n\t\t\t\t\t\t\t\t" + arraysizenew[id].toObject()["deadline"].toString());
             itemCP->setCheckState(Qt::Checked);
+            itemCP->setForeground(blackcolor);
             itemCP->setFlags(itemCP->flags());
             itemCP->setBackground(brushitem);
             //emit on_dialogTextAdded(item);
@@ -228,6 +238,7 @@ if (itemcb->checkState() == Qt::Checked){
 void MainWindow::on_checkboxback_clicked(QListWidgetItem *itemcbback)
 {
     QColor coloritem( 213, 216, 220 );
+    QColor blackcolor(0, 0, 0);
     QBrush brushitem(coloritem);
     if(itemcbback->checkState() == Qt::Unchecked){
         // ui->listWidget->takeItem(selectedRow);
@@ -272,6 +283,7 @@ void MainWindow::on_checkboxback_clicked(QListWidgetItem *itemcbback)
             QListWidgetItem *itemcpcbback = new QListWidgetItem();
             itemcpcbback->setText("\n " + arraysizenew[idcpdel].toObject()["task"].toString() + "\n\t\t\t\t\t\t\t\t" + arraysizenew[idcpdel].toObject()["deadline"].toString());
             itemcpcbback->setCheckState(Qt::Unchecked);
+            itemcpcbback->setForeground(blackcolor);
             itemcpcbback->setFlags(itemcpcbback->flags());
             itemcpcbback->setBackground(brushitem);
             //emit on_dialogTextAdded(item);
@@ -463,6 +475,7 @@ void MainWindow::on_listWidget2_itemClicked(QListWidgetItem *itemCPDel)
     }
     selectedRowCPDel = ui->listWidget2->row(itemCPDel);
     qDebug()<<"selectedCPDel"<<selectedRowCPDel;
+
     emit emitcpItemDel(itemCPDel);
 }
 

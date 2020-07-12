@@ -8,7 +8,7 @@ secDialog::secDialog(QWidget *parent) :
 {
     ui->setupUi(this);
     //ui->plainTextEdit->setFocusPolicy(Qt::NoFocus);
-   //ui->dateEdit->setFocusPolicy(Qt::NoFocus);
+    //ui->dateEdit->setFocusPolicy(Qt::NoFocus);
     //Set Disable Button When Text is Empty
     ui->pushButton->setEnabled(false);
     connect(ui->plainTextEdit, &QPlainTextEdit::textChanged, [&](){
@@ -40,9 +40,10 @@ secDialog::~secDialog()
 void secDialog::on_pushButton_clicked()
 {
     //ui->plainTextEdit->setFocusPolicy(Qt::NoFocus);
-   // ui->dateEdit->setFocusPolicy(Qt::NoFocus);
+    // ui->dateEdit->setFocusPolicy(Qt::NoFocus);
     QColor coloritem( 213, 216, 220 );
-        QBrush brushitem(coloritem);
+    QColor blackcolor(0, 0, 0);
+    QBrush brushitem(coloritem);
     QString fileData = QDir::homePath().append("/.config/todo.json");
     //Read Size Array
     QFile filesize(fileData);
@@ -78,6 +79,7 @@ void secDialog::on_pushButton_clicked()
     item->setCheckState(Qt::Unchecked);
     item->setSelected(false);
     item->setBackground(brushitem);
+    item->setForeground(blackcolor);
     item->setFlags(item->flags() &~Qt::ItemIsSelectable);
 
     emit on_dialogTextAdded(item);
